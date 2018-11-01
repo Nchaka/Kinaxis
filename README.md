@@ -1,6 +1,7 @@
 # Kinaxis
 Dynamic Chart Demo
 
-The main JavaScript itself runs autonomously. It doesn't require Node.
+You now need Node.js to run the application
 
-However, you can use the index.js Node file to share it via HTTP.
+You can also serve the JSON file using the getJSON callback. For instance do:
+http://localhost:8080/getJSON
