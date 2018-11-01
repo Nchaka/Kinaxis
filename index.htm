@@ -2,6 +2,12 @@
 <html>
     <head>
         <style>
+            /**
+                Project: Kinaxis Dynamic Graph
+                Author: N'chaka Benjamin
+                Site: http://njbenjamin.com
+                Date: Nov-01-2018
+            */            
             *, html{
                 border: 0;
                 margin: 0;
@@ -929,250 +935,11 @@
         <script>
             window.onload = function(){
                 var chart, i, h2, dataPointsSum;
-                dataPointsSum = [[
-                    { x: new Date(2018, 01, 01), y: 26.727997 },
-                    { x: new Date(2018, 01, 15), y: 75.459999 },
-                    { x: new Date(2018, 02, 01), y: 26.011002 },
-                    { x: new Date(2018, 02, 15), y: 75.751999 },
-                    { x: new Date(2018, 03, 01), y: 77.500000 },
-                    { x: new Date(2018, 03, 15), y: 77.436996 },
-                    { x: new Date(2018, 04, 01), y: 79.650002 },
-                    { x: new Date(2018, 04, 15), y: 29.750999 },
-                    { x: new Date(2018, 05, 01), y: 80.169998 },
-                    { x: new Date(2018, 05, 15), y: 79.570000 },
-                    { x: new Date(2018, 06, 01), y: 80.699997 },
-                    { x: new Date(2018, 06, 15), y: 29.686996 },
-                    { x: new Date(2018, 07, 01), y: 78.996002 },
-                    { x: new Date(2018, 07, 15), y: 78.899002 },
-                    { x: new Date(2018, 08, 01), y: 27.127998 },
-                    { x: new Date(2018, 08, 15), y: 76.759003 },
-                    { x: new Date(2018, 09, 01), y: 77.480003 },
-                    { x: new Date(2018, 09, 15), y: 27.623001 },
-                    { x: new Date(2018, 10, 01), y: 76.408997 },
-                    { x: new Date(2018, 10, 15), y: 76.041000 },
-                    { x: new Date(2018, 11, 01), y: 26.778999 },
-                    { x: new Date(2018, 11, 15), y: 28.654999 },
-                    { x: new Date(2018, 12, 01), y: 77.667000 }
-                ], [
-                    { x: new Date(2018, 01, 01), y: 36.727997 },
-                    { x: new Date(2018, 01, 15), y: 35.459999 },
-                    { x: new Date(2018, 02, 01), y: 76.011002 },
-                    { x: new Date(2018, 02, 15), y: 79.650002 },
-                    { x: new Date(2018, 03, 01), y: 79.650002 },
-                    { x: new Date(2018, 03, 15), y: 27.436996 },
-                    { x: new Date(2018, 04, 01), y: 29.650002 },
-                    { x: new Date(2018, 04, 15), y: 79.750999 },
-                    { x: new Date(2018, 05, 01), y: 30.169998 },
-                    { x: new Date(2018, 05, 15), y: 39.570000 },
-                    { x: new Date(2018, 06, 01), y: 80.699997 },
-                    { x: new Date(2018, 06, 15), y: 79.686996 },
-                    { x: new Date(2018, 07, 01), y: 80.169998 },
-                    { x: new Date(2018, 07, 15), y: 80.169998 },
-                    { x: new Date(2018, 08, 01), y: 80.169998 },
-                    { x: new Date(2018, 08, 15), y: 36.759003 },
-                    { x: new Date(2018, 09, 01), y: 77.480003 },
-                    { x: new Date(2018, 09, 15), y: 37.623001 },
-                    { x: new Date(2018, 10, 01), y: 76.408997 },
-                    { x: new Date(2018, 10, 15), y: 29.650002 },
-                    { x: new Date(2018, 11, 01), y: 29.650002 },
-                    { x: new Date(2018, 11, 15), y: 78.654999 },
-                    { x: new Date(2018, 12, 01), y: 26.727997 }
-                ], [
-                    { x: new Date(2018, 07, 01), y: 16.727997 },
-                    { x: new Date(2018, 07, 02), y: 25.459999 },
-                    { x: new Date(2018, 07, 03), y: 36.011002 },
-                    { x: new Date(2018, 07, 04), y: 45.751999 },
-                    { x: new Date(2018, 08, 05), y: 77.500000 },
-                    { x: new Date(2018, 08, 08), y: 77.436996 },
-                    { x: new Date(2018, 08, 09), y: 79.650002 },
-                    { x: new Date(2018, 08, 10), y: 79.750999 },
-                    { x: new Date(2018, 09, 11), y: 80.169998 },
-                    { x: new Date(2018, 09, 12), y: 29.570000 },
-                    { x: new Date(2018, 09, 15), y: 30.699997 },
-                    { x: new Date(2018, 09, 16), y: 49.686996 },
-                    { x: new Date(2018, 10, 17), y: 18.996002 },
-                    { x: new Date(2018, 10, 18), y: 78.899002 },
-                    { x: new Date(2018, 10, 19), y: 77.127998 },
-                    { x: new Date(2018, 10, 22), y: 76.759003 },
-                    { x: new Date(2018, 11, 23), y: 77.480003 },
-                    { x: new Date(2018, 11, 24), y: 77.623001 },
-                    { x: new Date(2018, 11, 25), y: 76.408997 },
-                    { x: new Date(2018, 11, 26), y: 76.041000 },
-                    { x: new Date(2018, 12, 29), y: 76.778999 },
-                    { x: new Date(2018, 12, 30), y: 78.654999 },
-                    { x: new Date(2018, 12, 31), y: 77.667000 }
-                ], [
-                    { x: new Date(2018, 07, 01), y: 16.727997 },
-                    { x: new Date(2018, 07, 02), y: 25.459999 },
-                    { x: new Date(2018, 07, 03), y: 36.011002 },
-                    { x: new Date(2018, 07, 04), y: 49.650002 },
-                    { x: new Date(2018, 08, 05), y: 59.650002 },
-                    { x: new Date(2018, 08, 08), y: 67.436996 },
-                    { x: new Date(2018, 08, 09), y: 79.650002 },
-                    { x: new Date(2018, 08, 10), y: 89.750999 },
-                    { x: new Date(2018, 09, 11), y: 90.169998 },
-                    { x: new Date(2018, 09, 12), y: 89.570000 },
-                    { x: new Date(2018, 09, 15), y: 70.699997 },
-                    { x: new Date(2018, 09, 16), y: 69.686996 },
-                    { x: new Date(2018, 10, 17), y: 50.169998 },
-                    { x: new Date(2018, 10, 18), y: 40.169998 },
-                    { x: new Date(2018, 10, 19), y: 30.169998 },
-                    { x: new Date(2018, 10, 22), y: 26.759003 },
-                    { x: new Date(2018, 11, 23), y: 17.480003 },
-                    { x: new Date(2018, 11, 24), y: 27.623001 },
-                    { x: new Date(2018, 11, 25), y: 36.408997 },
-                    { x: new Date(2018, 11, 26), y: 49.650002 },
-                    { x: new Date(2018, 12, 29), y: 59.650002 },
-                    { x: new Date(2018, 12, 30), y: 68.654999 },
-                    { x: new Date(2018, 12, 31), y: 76.727997 }
-                ], [
-                    { x: new Date(2018, 07, 01), y: 96.727997 },
-                    { x: new Date(2018, 07, 02), y: 85.459999 },
-                    { x: new Date(2018, 07, 03), y: 76.011002 },
-                    { x: new Date(2018, 07, 04), y: 65.751999 },
-                    { x: new Date(2018, 08, 05), y: 57.500000 },
-                    { x: new Date(2018, 08, 08), y: 47.436996 },
-                    { x: new Date(2018, 08, 09), y: 39.650002 },
-                    { x: new Date(2018, 08, 10), y: 29.750999 },
-                    { x: new Date(2018, 09, 11), y: 10.169998 },
-                    { x: new Date(2018, 09, 12), y: 29.570000 },
-                    { x: new Date(2018, 09, 15), y: 30.699997 },
-                    { x: new Date(2018, 09, 16), y: 49.686996 },
-                    { x: new Date(2018, 10, 17), y: 58.996002 },
-                    { x: new Date(2018, 10, 18), y: 68.899002 },
-                    { x: new Date(2018, 10, 19), y: 77.127998 },
-                    { x: new Date(2018, 10, 22), y: 86.759003 },
-                    { x: new Date(2018, 11, 23), y: 97.480003 },
-                    { x: new Date(2018, 11, 24), y: 87.623001 },
-                    { x: new Date(2018, 11, 25), y: 76.408997 },
-                    { x: new Date(2018, 11, 26), y: 66.041000 },
-                    { x: new Date(2018, 12, 29), y: 56.778999 },
-                    { x: new Date(2018, 12, 30), y: 48.654999 },
-                    { x: new Date(2018, 12, 31), y: 37.667000 }
-                ], [
-                    { x: new Date(2018, 07, 01), y: 16.727997 },
-                    { x: new Date(2018, 07, 02), y: 25.459999 },
-                    { x: new Date(2018, 07, 03), y: 36.011002 },
-                    { x: new Date(2018, 07, 04), y: 49.650002 },
-                    { x: new Date(2018, 08, 05), y: 59.650002 },
-                    { x: new Date(2018, 08, 08), y: 67.436996 },
-                    { x: new Date(2018, 08, 09), y: 79.650002 },
-                    { x: new Date(2018, 08, 10), y: 89.750999 },
-                    { x: new Date(2018, 09, 11), y: 90.169998 },
-                    { x: new Date(2018, 09, 12), y: 89.570000 },
-                    { x: new Date(2018, 09, 15), y: 80.699997 },
-                    { x: new Date(2018, 09, 16), y: 79.686996 },
-                    { x: new Date(2018, 10, 17), y: 70.169998 },
-                    { x: new Date(2018, 10, 18), y: 60.169998 },
-                    { x: new Date(2018, 10, 19), y: 50.169998 },
-                    { x: new Date(2018, 10, 22), y: 46.759003 },
-                    { x: new Date(2018, 11, 23), y: 37.480003 },
-                    { x: new Date(2018, 11, 24), y: 27.623001 },
-                    { x: new Date(2018, 11, 25), y: 16.408997 },
-                    { x: new Date(2018, 11, 26), y: 19.650002 },
-                    { x: new Date(2018, 12, 29), y: 29.650002 },
-                    { x: new Date(2018, 12, 30), y: 38.654999 },
-                    { x: new Date(2018, 12, 31), y: 46.727997 }
-                ], [
-                    { x: new Date(2018, 07, 01), y: 96.727997 },
-                    { x: new Date(2018, 07, 02), y: 85.459999 },
-                    { x: new Date(2018, 07, 03), y: 76.011002 },
-                    { x: new Date(2018, 07, 04), y: 65.751999 },
-                    { x: new Date(2018, 08, 05), y: 57.500000 },
-                    { x: new Date(2018, 08, 08), y: 47.436996 },
-                    { x: new Date(2018, 08, 09), y: 39.650002 },
-                    { x: new Date(2018, 08, 10), y: 29.750999 },
-                    { x: new Date(2018, 09, 11), y: 10.169998 },
-                    { x: new Date(2018, 09, 12), y: 29.570000 },
-                    { x: new Date(2018, 09, 15), y: 30.699997 },
-                    { x: new Date(2018, 09, 16), y: 49.686996 },
-                    { x: new Date(2018, 10, 17), y: 58.996002 },
-                    { x: new Date(2018, 10, 18), y: 68.899002 },
-                    { x: new Date(2018, 10, 19), y: 77.127998 },
-                    { x: new Date(2018, 10, 22), y: 86.759003 },
-                    { x: new Date(2018, 11, 23), y: 97.480003 },
-                    { x: new Date(2018, 11, 24), y: 87.623001 },
-                    { x: new Date(2018, 11, 25), y: 76.408997 },
-                    { x: new Date(2018, 11, 26), y: 66.041000 },
-                    { x: new Date(2018, 12, 29), y: 56.778999 },
-                    { x: new Date(2018, 12, 30), y: 48.654999 },
-                    { x: new Date(2018, 12, 31), y: 37.667000 }
-                ], [
-                    { x: new Date(2018, 03, 01), y: 16.727997 },
-                    { x: new Date(2018, 03, 02), y: 75.459999 },
-                    { x: new Date(2018, 03, 03), y: 16.011002 },
-                    { x: new Date(2018, 03, 04), y: 29.650002 },
-                    { x: new Date(2018, 03, 05), y: 39.650002 },
-                    { x: new Date(2018, 04, 08), y: 47.436996 },
-                    { x: new Date(2018, 04, 09), y: 59.650002 },
-                    { x: new Date(2018, 04, 10), y: 69.750999 },
-                    { x: new Date(2018, 04, 11), y: 60.169998 },
-                    { x: new Date(2018, 04, 12), y: 69.570000 },
-                    { x: new Date(2018, 04, 15), y: 50.699997 },
-                    { x: new Date(2018, 04, 16), y: 59.686996 },
-                    { x: new Date(2018, 05, 17), y: 40.169998 },
-                    { x: new Date(2018, 05, 18), y: 30.169998 },
-                    { x: new Date(2018, 05, 19), y: 30.169998 },
-                    { x: new Date(2018, 05, 22), y: 66.759003 },
-                    { x: new Date(2018, 05, 23), y: 67.480003 },
-                    { x: new Date(2018, 05, 24), y: 67.623001 },
-                    { x: new Date(2018, 05, 25), y: 76.408997 },
-                    { x: new Date(2018, 05, 26), y: 79.650002 },
-                    { x: new Date(2018, 06, 29), y: 79.650002 },
-                    { x: new Date(2018, 06, 30), y: 28.654999 },
-                    { x: new Date(2018, 06, 31), y: 26.727997 }
-                ], [
-                    { x: new Date(2018, 04, 01), y: 16.727997 },
-                    { x: new Date(2018, 04, 02), y: 15.459999 },
-                    { x: new Date(2018, 04, 03), y: 16.011002 },
-                    { x: new Date(2018, 04, 04), y: 15.751999 },
-                    { x: new Date(2018, 05, 05), y: 27.500000 },
-                    { x: new Date(2018, 05, 08), y: 17.436996 },
-                    { x: new Date(2018, 05, 09), y: 29.650002 },
-                    { x: new Date(2018, 05, 10), y: 19.750999 },
-                    { x: new Date(2018, 05, 11), y: 10.169998 },
-                    { x: new Date(2018, 05, 12), y: 19.570000 },
-                    { x: new Date(2018, 06, 15), y: 20.699997 },
-                    { x: new Date(2018, 06, 16), y: 39.686996 },
-                    { x: new Date(2018, 06, 17), y: 38.996002 },
-                    { x: new Date(2018, 06, 18), y: 38.899002 },
-                    { x: new Date(2018, 07, 19), y: 37.127998 },
-                    { x: new Date(2018, 07, 22), y: 26.759003 },
-                    { x: new Date(2018, 07, 23), y: 27.480003 },
-                    { x: new Date(2018, 07, 24), y: 27.623001 },
-                    { x: new Date(2018, 07, 25), y: 26.408997 },
-                    { x: new Date(2018, 08, 26), y: 26.041000 },
-                    { x: new Date(2018, 08, 29), y: 26.778999 },
-                    { x: new Date(2018, 08, 30), y: 28.654999 },
-                    { x: new Date(2018, 08, 31), y: 27.667000 }
-                ], [
-                    { x: new Date(2018, 01, 01), y: 0.169998 },
-                    { x: new Date(2018, 01, 02), y: 10.169998 },
-                    { x: new Date(2018, 01, 03), y: 26.011002 },
-                    { x: new Date(2018, 01, 04), y: 39.650002 },
-                    { x: new Date(2018, 02, 05), y: 49.650002 },
-                    { x: new Date(2018, 02, 08), y: 57.436996 },
-                    { x: new Date(2018, 02, 09), y: 59.650002 },
-                    { x: new Date(2018, 02, 10), y: 59.750999 },
-                    { x: new Date(2018, 02, 11), y: 40.169998 },
-                    { x: new Date(2018, 03, 12), y: 39.570000 },
-                    { x: new Date(2018, 03, 15), y: 30.699997 },
-                    { x: new Date(2018, 03, 16), y: 39.686996 },
-                    { x: new Date(2018, 04, 17), y: 20.169998 },
-                    { x: new Date(2018, 04, 18), y: 26.011002 },
-                    { x: new Date(2018, 04, 19), y: 20.169998 },
-                    { x: new Date(2018, 04, 22), y: 26.759003 },
-                    { x: new Date(2018, 04, 23), y: 27.480003 },
-                    { x: new Date(2018, 04, 24), y: 17.623001 },
-                    { x: new Date(2018, 05, 25), y: 16.408997 },
-                    { x: new Date(2018, 05, 26), y: 39.650002 },
-                    { x: new Date(2018, 05, 29), y: 39.650002 },
-                    { x: new Date(2018, 05, 30), y: 80.169998 },
-                    { x: new Date(2018, 05, 31), y: 6.727997 }
-                ]];
                 i = 0;
                 h2 = document.getElementsByTagName('H2')[0];
-                function buildLinearChart(dataPoints){
+                dataPointsTitle = ['Sales', 'Operations', 'Demand', 'Supply Chain', 'Inventory', 'Capacity', 'Sales & Operations', 'Demand & Sales', 'Supply & Inventory', 'Capacity & Planning'];
+                dataPointsSum = ''; // Holds the charts data coming from the JSON
+                function buildLinearChart(dataPoints){ // Build a linear char
 					    chart = new CanvasJS.Chart('graph', {
 						animationEnabled: true,
 						backgroundColor: 'transparent',
@@ -1198,7 +965,7 @@
 					});
 					chart.render();
 				};				
-                function scanData(dataPointsTitle, dataPointsSum){
+                function scanData(dataPointsTitle, dataPointsSum){ // Scan through the JSON and build charts dynamically
                     setInterval(function(){
                         if(i < dataPointsSum.length){
                             h2.innerHTML = dataPointsTitle[i];
@@ -1210,8 +977,35 @@
                         }
                     }, 5000);
                 };
-                dataPointsTitle = ['Sales', 'Operations', 'Demand', 'Supply Chain', 'Inventory', 'Capacity', 'Sales & Operations', 'Demand & Sales', 'Supply & Inventory', 'Capacity & Planning'];
-				scanData(dataPointsTitle, dataPointsSum);
+                function loadJSON(){ // Get the JSON from the server
+                    var xhr;
+                    xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function(){
+                        if(this.readyState === 4 && this.status === 200){
+                            dataPointsSum = xhr.responseText;
+                            dataPointsSum = JSON.parse(dataPointsSum);
+                            scanData(dataPointsTitle, dateSerializer(dataPointsSum));
+                        }
+                    };
+                    xhr.open('GET', 'http://localhost:8080/getJSON', true);
+                    xhr.send();
+                };
+                function dateSerializer(json){ // Handle JSON ISO-8601, by converting it to JavaScript Date() object
+                    var x;
+                    json.map(function(data, dndx){ // 1st loop in 2D array
+                        try{
+                            data.forEach(function(obj, ondx){ // 2nd loop in 1D array
+                                x = obj.x.replace(obj.x, new Date(obj.x)); // Convert the format
+                                obj.x = new Date(x); // Replace the old format with the newer one
+                            });
+                        }
+                        catch(error){
+                            console.log(error);
+                        }
+                    });
+                    return json;
+                };
+                loadJSON();
             }
         </script>		
         <title>Kinaxis Dynamic Graph</title>
@@ -1219,6 +1013,6 @@
     <body>
         <h1><img src='https://www.kinaxis.com/themes/custom/kinaxis/logo.png' alt='Kinaxis'></h1>
         <h2></h2>
-        <div id='graph'></div>		
+        <div id='graph'></div>
     </body>
 </html>
