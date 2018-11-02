@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>        
         <style>
             /**
                 Project: Kinaxis Dynamic Graph
@@ -937,10 +939,11 @@
                 var chart, i, h2, dataPointsSum;
                 i = 0;
                 h2 = document.getElementsByTagName('H2')[0];
-                dataPointsTitle = ['Sales', 'Operations', 'Demand', 'Supply Chain', 'Inventory', 'Capacity', 'Sales & Operations', 'Demand & Sales', 'Supply & Inventory', 'Capacity & Planning'];
+                // The dataPointsTitles is used in parallel with dataPointsSum to identify and name the data points, i.e the titles should be unique and the amount of array items must match the dataPointsSum 
+                dataPointsTitles = ['Sales', 'Sales & Operations', 'Operations', 'Demand', 'Demand & Sales', 'Supply Chain', 'Supply & Inventory', 'Inventory', 'Capacity', 'Capacity & Inventory'];
                 dataPointsSum = ''; // Holds the charts data coming from the JSON
-                function buildLinearChart(dataPoints){ // Build a linear char
-					    chart = new CanvasJS.Chart('graph', {
+                function buildLinearChart(flag, dataPoints, dataPoints2){ // Build a linear char
+					chart = new CanvasJS.Chart('graph', {
 						animationEnabled: true,
 						backgroundColor: 'transparent',
 						axisX:{
@@ -954,22 +957,60 @@
 						axisY: {
 							labelFontColor: 'white',
 							includeZero: false
-						},
-						data: [{
-							type: 'area',
-							color: '#ea616f',
-							xValueFormatString: 'DD MMM',
-							yValueFormatString: '##0.00',
-							dataPoints: dataPoints
-						}]
+                        },
+						data: stackable(flag, dataPoints, dataPoints2)
 					});
 					chart.render();
-				};				
-                function scanData(dataPointsTitle, dataPointsSum){ // Scan through the JSON and build charts dynamically
+                };
+                function ChartData(dataPoints){ // A constructor containing the properties of the chart
+                    // Default values
+                    this.type = 'stackedArea';
+                    this.color = '#ea616f';
+                    this.xValueFormatString = 'DD MMM';
+                    this.yValueFormatString = '##0.00';
+                    this.dataPoints = dataPoints;
+                    return this;
+                };
+                function stackable(flag, dataPoints, dataPoints2){ // Allows the 'area' chart to be showned as single or double => stacked 
+                    var chartData, chartDataCopy;
+                    dataPoints2 = dataPoints2 || dataPoints; // Defaults to dataPoints if nothing is specified
+                    chartData = new ChartData(dataPoints);
+                    if(flag === true){ // Stackable
+                        chartDataCopy = new ChartData(dataPoints);
+                        chartDataCopy.color = '#66ff99';
+                        chartDataCopy.dataPoints = dataPoints2;
+                        chartData = [chartData, chartDataCopy];
+                    }
+                    else{
+                        chartData = [chartData];
+                    }
+                    return chartData;
+                };
+                function analyseDataPoints(i){ // Identifies a set of datapoints, and decides whether they are stackable or not
+                    var chartID, chart2; // Stacks up to 2 charts
+                    chartID = dataPointsTitles[i].split('&');
+                    h2.innerHTML = dataPointsTitles[i];
+                    if(chartID.length > 1){
+                        chart2 = chartID[1].toLowerCase().trim(); // The second set of data points doesn't exist on the JSON, it will be assumed
+                        buildLinearChart(true, dataPointsSum[i], findDataPoints(chart2)); // True => stackable   
+                    }
+                    else{
+                        buildLinearChart(false, dataPointsSum[i]); // False => Not stackable
+                    }
+                };
+                function findDataPoints(chart2){ // An analyseDataPoints() helper searching for a given data point based on its ID
+                    var results;
+                    dataPointsTitles.map(function(dataPoints, dndx){
+                        if(chart2 === dataPoints.toLowerCase().trim()){
+                            results = dataPointsSum[dndx];
+                        }
+                    });
+                    return results;
+                }		
+                function scanData(dataPointsTitles, dataPointsSum){ // Scan through the JSON and build charts dynamically
                     setInterval(function(){
                         if(i < dataPointsSum.length){
-                            h2.innerHTML = dataPointsTitle[i];
-                            buildLinearChart(dataPointsSum[i]);
+                            analyseDataPoints(i);
                             i++;
                         }
                         else{
@@ -984,7 +1025,7 @@
                         if(this.readyState === 4 && this.status === 200){
                             dataPointsSum = xhr.responseText;
                             dataPointsSum = JSON.parse(dataPointsSum);
-                            scanData(dataPointsTitle, dateSerializer(dataPointsSum));
+                            scanData(dataPointsTitles, dateSerializer(dataPointsSum));
                         }
                     };
                     xhr.open('GET', 'http://localhost:8080/getJSON', true);

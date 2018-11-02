@@ -3,6 +3,7 @@ var http, html, fileSystem, url, dJSONPath, path;
 http = require('http');
 fileSystem = require('fs');
 url = require('url');
+
 dJSONPath = '/getJSON'; // The async path/function to the JSON file
 
 htmlHeader = {'Content-Type': 'text/html'};
