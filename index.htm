@@ -943,24 +943,24 @@
                 dataPointsTitles = ['Sales', 'Sales & Operations', 'Operations', 'Demand', 'Demand & Sales', 'Supply Chain', 'Supply & Inventory', 'Inventory', 'Capacity', 'Capacity & Inventory'];
                 dataPointsSum = ''; // Holds the charts data coming from the JSON
                 function buildLinearChart(flag, dataPoints, dataPoints2){ // Build a linear char
-					chart = new CanvasJS.Chart('graph', {
-						animationEnabled: true,
-						backgroundColor: 'transparent',
-						axisX:{
-							valueFormatString: 'MMM',
-							labelFontColor: 'white',
-							crosshair: {
-								enabled: true,
-								snapToDataPoint: true
-							}
-						},
-						axisY: {
-							labelFontColor: 'white',
-							includeZero: false
-                        },
-						data: stackable(flag, dataPoints, dataPoints2)
-					});
-					chart.render();
+			chart = new CanvasJS.Chart('graph', {
+				animationEnabled: true,
+				backgroundColor: 'transparent',
+				axisX:{
+					valueFormatString: 'MMM',
+					labelFontColor: 'white',
+					crosshair: {
+						enabled: true,
+						snapToDataPoint: true
+					}
+				},
+				axisY: {
+					labelFontColor: 'white',
+					includeZero: false
+				},
+				data: stackable(flag, dataPoints, dataPoints2)
+			});
+			chart.render();
                 };
                 function ChartData(dataPoints){ // A constructor containing the properties of the chart
                     // Default values
@@ -971,7 +971,7 @@
                     this.dataPoints = dataPoints;
                     return this;
                 };
-                function stackable(flag, dataPoints, dataPoints2){ // Allows the 'area' chart to be showned as single or double => stacked 
+                function stackable(flag, dataPoints, dataPoints2){ // Allows the 'area' chart to be shown as single or double => stacked 
                     var chartData, chartDataCopy;
                     dataPoints2 = dataPoints2 || dataPoints; // Defaults to dataPoints if nothing is specified
                     chartData = new ChartData(dataPoints);
